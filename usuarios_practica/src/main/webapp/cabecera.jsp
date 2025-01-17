@@ -29,9 +29,9 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
-						href="http://localhost:8080/empresa_syf/">Ventas</a></li>
+						href="http://localhost:8080/empresa_syf/VentasController">Ventas</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="http://localhost:8080/empresa_syf/ConsumidoreController">Clientes</a></li>
+						href="http://localhost:8080/empresa_syf/ConsumidoresController">Clientes</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="http://localhost:8080/empresa_syf/EmpleadosController">Personal</a></li>
 					<li class="nav-item"><a class="nav-link"

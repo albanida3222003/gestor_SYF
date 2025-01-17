@@ -31,16 +31,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ConsumidoresController</display-name>
-    <servlet-name>ConsumidoresController</servlet-name>
-    <servlet-class>com.unu.controllers.ConsumidoresController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConsumidoresController</servlet-name>
-    <url-pattern>/ConsumidoresController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>ProveedoresController</display-name>
     <servlet-name>ProveedoresController</servlet-name>
     <servlet-class>com.unu.controllers.ProveedoresController</servlet-class>
@@ -108,5 +98,15 @@
   <servlet-mapping>
     <servlet-name>ProduccionesController</servlet-name>
     <url-pattern>/ProduccionesController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConsumidoresController</display-name>
+    <servlet-name>ConsumidoresController</servlet-name>
+    <servlet-class>com.unu.controllers.ConsumidoresController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsumidoresController</servlet-name>
+    <url-pattern>/ConsumidoresController</url-pattern>
   </servlet-mapping>
 </web-app>

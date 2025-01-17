@@ -8,21 +8,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import com.unu.beans.Contratos;
 import com.unu.beans.Consumidor;
-import com.unu.beans.Ventas;
 import com.unu.model.ConsumidorModel;
-import com.unu.model.VentasModel;
+import com.unu.model.EmpleadosModel;
 
-public class VentasController extends HttpServlet {
+public class ConsumidoresController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private VentasModel ventasModel = new VentasModel();
 	private ConsumidorModel consumidorModel = new ConsumidorModel();
 	
-	public VentasController() {
+	public ConsumidoresController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
+	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -44,6 +42,7 @@ public class VentasController extends HttpServlet {
 		}
 	}
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		processRequest(request, response);
@@ -51,19 +50,20 @@ public class VentasController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		processRequest(request, response);
 	}
-
+	
 	protected void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			List<Consumidor> consumidores = consumidorModel.listarConsumidores();
-			request.setAttribute("consumidores", consumidores);
-			List<Ventas> ventas = ventasModel.listarVentas();
-			request.setAttribute("ventas", ventas);
-			request.getRequestDispatcher("/ventas/listarVentas.jsp").forward(request, response);
+			List<Consumidor> consumidor = consumidorModel.listarConsumidores();
+			request.setAttribute("consumidores", consumidor);
+			request.getRequestDispatcher("/consumidores/listarConsumidores.jsp").forward(request, response);
 		} catch (Exception e) {
 			System.out.println("listar() " + e.getMessage());
 		}
 	}
+
+
 }

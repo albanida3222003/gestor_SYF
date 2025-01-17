@@ -17,7 +17,7 @@
         <h2 class="text-center">Lista de Consumidores</h2>
 
         <div class="d-flex justify-content-end mb-3">
-            <a href="ConsumidoresController?operacion=nuevo" class="btn btn-success">Registrar Nuevo Consumidor</a>
+            <a href="ConsumidoresController?operacion=nuevo" class="btn btn-success">Registrar Nueva Venta</a>
         </div>
 
         <table class="table table-dark table-striped text-center">
