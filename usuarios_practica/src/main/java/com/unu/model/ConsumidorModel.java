@@ -35,7 +35,34 @@ public class ConsumidorModel extends Conexion {
         }
         return consumidores;
     }
+    
+    public Consumidor obtenerConsumidor(int idConsumidor) {
+        Consumidor consumidor = null;
+        try {
+            // Llamada al procedimiento almacenado para obtener un consumidor
+            String sql = "CALL sp_obtener_consumidor(?);";
+            this.openConnection();
+            cs = conexion.prepareCall(sql);
+            cs.setInt(1, idConsumidor);  // Se pasa el ID del consumidor como parámetro
 
+            rs = cs.executeQuery();
+
+            if (rs.next()) {
+                consumidor = new Consumidor();
+                consumidor.setIdconsumidor(rs.getInt("idconsumidor"));
+                consumidor.setNombre(rs.getString("nombre"));
+                consumidor.setTelefono(rs.getString("telefono"));
+                consumidor.setCorreo(rs.getString("correo"));
+                consumidor.setDireccion(rs.getString("direccion"));
+            }
+
+            this.closeConnection();
+        } catch (Exception e) {
+            System.out.println("obtenerConsumidor() " + e.getMessage());
+        }
+        return consumidor;
+    }
+    
     // Método para insertar un consumidor
     public boolean insertarConsumidor(Consumidor consumidor) {
         boolean resultado = false;

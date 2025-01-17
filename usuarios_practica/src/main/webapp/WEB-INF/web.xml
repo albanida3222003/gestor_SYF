@@ -21,13 +21,13 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>ProductosController</display-name>
-    <servlet-name>ProductosController</servlet-name>
-    <servlet-class>com.unu.controllers.ProductosController</servlet-class>
+    <display-name>ContratosController</display-name>
+    <servlet-name>ContratosController</servlet-name>
+    <servlet-class>com.unu.controllers.ContratosController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ProductosController</servlet-name>
-    <url-pattern>/ProductosController</url-pattern>
+    <servlet-name>ContratosController</servlet-name>
+    <url-pattern>/ContratosController</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -48,5 +48,65 @@
   <servlet-mapping>
     <servlet-name>ProveedoresController</servlet-name>
     <url-pattern>/ProveedoresController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VentasController</display-name>
+    <servlet-name>VentasController</servlet-name>
+    <servlet-class>com.unu.controllers.VentasController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VentasController</servlet-name>
+    <url-pattern>/VentasController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HorariosController</display-name>
+    <servlet-name>HorariosController</servlet-name>
+    <servlet-class>com.unu.controllers.HorariosController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HorariosController</servlet-name>
+    <url-pattern>/HorariosController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProductosController</display-name>
+    <servlet-name>ProductosController</servlet-name>
+    <servlet-class>com.unu.controllers.ProductosController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductosController</servlet-name>
+    <url-pattern>/ProductosController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DetalleSuministroController</display-name>
+    <servlet-name>DetalleSuministroController</servlet-name>
+    <servlet-class>com.unu.controllers.DetalleSuministroController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetalleSuministroController</servlet-name>
+    <url-pattern>/DetalleSuministroController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DepartamentosController</display-name>
+    <servlet-name>DepartamentosController</servlet-name>
+    <servlet-class>com.unu.controllers.DepartamentosController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DepartamentosController</servlet-name>
+    <url-pattern>/DepartamentosController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProduccionesController</display-name>
+    <servlet-name>ProduccionesController</servlet-name>
+    <servlet-class>com.unu.controllers.ProduccionesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProduccionesController</servlet-name>
+    <url-pattern>/ProduccionesController</url-pattern>
   </servlet-mapping>
 </web-app>

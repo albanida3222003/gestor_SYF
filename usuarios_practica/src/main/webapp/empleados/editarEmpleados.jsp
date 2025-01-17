@@ -21,7 +21,7 @@
 
         <div class="card bg-secondary p-4">
             <form action="EmpleadosController" method="POST">
-                <input type="hidden" name="operacion" value="modicar">
+                <input type="hidden" name="operacion" value="modificar">
                 <input type="hidden" name="idEmpleados" value="<%= empleado.getIdEmpleados() %>">
 
                 <div class="mb-3">
@@ -66,7 +66,7 @@
                     <label class="form-label">Fecha de Nacimiento</label>
                     <input type="date" name="fechaNacimiento" class="form-control" value="<%= empleado.getFechaNacimiento() %>" required>
                 </div>
-
+				
                 <div class="text-center">
                     <button type="submit" class="btn btn-warning">Actualizar</button>
                     <a href="listarEmpleados.jsp" class="btn btn-danger">Cancelar</a>

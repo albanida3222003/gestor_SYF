@@ -15,9 +15,8 @@
         <h2 class="text-center">Registrar Nuevo Empleado</h2>
 
         <div class="card bg-secondary p-4">
-            <form action="EmpleadosController" method="POST">
-                <input type="hidden" name="operacion" value="registrar">
-                
+            <form action="EmpleadosController?operacion=registrarEmpleado" method="POST">
+                <!-- Campos de empleado -->
                 <div class="mb-3">
                     <label class="form-label">Nombre</label>
                     <input type="text" name="nombre" class="form-control" required>
@@ -62,8 +61,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-success">Registrar</button>
-                    <a href="listarEmpleados.jsp" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Registrar Empleado</button>
                 </div>
             </form>
         </div>
