@@ -36,7 +36,7 @@ public class ConsumidorModel extends Conexion {
         return consumidores;
     }
     
-    public Consumidor obtenerConsumidor(int idConsumidor) {
+    public Consumidor obtener(int idConsumidor) {
         Consumidor consumidor = null;
         try {
             // Llamada al procedimiento almacenado para obtener un consumidor

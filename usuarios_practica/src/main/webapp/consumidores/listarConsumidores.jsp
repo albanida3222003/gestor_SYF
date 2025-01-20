@@ -17,7 +17,7 @@
         <h2 class="text-center">Lista de Consumidores</h2>
 
         <div class="d-flex justify-content-end mb-3">
-            <a href="ConsumidoresController?operacion=nuevo" class="btn btn-success">Registrar Nueva Venta</a>
+            <a href="ConsumidoresController?operacion=nuevo" class="btn btn-success">Registrar Nuevo Consumidor</a>
         </div>
 
         <table class="table table-dark table-striped text-center">
@@ -42,7 +42,7 @@
                     <td><%= cons.getCorreo() %></td>
                     <td><%= cons.getDireccion() %></td>
                     <td>
-                        <a href="ConsumidoresController?operacion=editar&idConsumidor=<%= cons.getIdconsumidor() %>" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="ConsumidoresController?operacion=obtener&idConsumidor=<%= cons.getIdconsumidor() %>" class="btn btn-warning btn-sm">Editar</a>
                         <a href="ConsumidoresController?operacion=eliminar&idConsumidor=<%= cons.getIdconsumidor() %>" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>

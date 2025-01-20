@@ -42,7 +42,7 @@
                     <td><%= proveedor.getTelefono() %></td>
                     <td><%= proveedor.getDireccion() %></td>
                     <td>
-                        <a href="ProveedoresController?operacion=editar&idProveedor=<%= proveedor.getIdproveedor() %>" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="ProveedoresController?operacion=obtener&idProveedor=<%= proveedor.getIdproveedor() %>" class="btn btn-warning btn-sm">Editar</a>
                         <a href="ProveedoresController?operacion=eliminar&idProveedor=<%= proveedor.getIdproveedor() %>" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>

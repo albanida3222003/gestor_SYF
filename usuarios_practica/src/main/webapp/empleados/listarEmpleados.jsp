@@ -22,9 +22,17 @@
 		<h2 class="text-center">Lista de Empleados</h2>
 
 		<div class="d-flex justify-content-end mb-3">
-			<a href="<%=url%>EmpleadosController?operacion=nuevo"
+			<a href="ProduccionesController?operacion=listar"
+				class="btn btn-info me-2">Lista Produccion</a> <a
+				href="ProduccionesController?operacion=nuevo"
+				class="btn btn-info me-2">Registrar Producción</a> <a
+				href="ContratosController?operacion=nuevo"
+				class="btn btn-primary me-2">Registrar Contrato</a> <a
+				href="<%=url%>EmpleadosController?operacion=nuevo"
 				class="btn btn-success">Registrar Nuevo Empleado</a>
+
 		</div>
+
 
 		<table class="table table-dark table-striped text-center">
 			<thead>
@@ -43,10 +51,8 @@
 				List<Empleados> empleados = (List<Empleados>) request.getAttribute("empleados");
 				List<Contratos> contratos = (List<Contratos>) request.getAttribute("contratos");
 
-				if (empleados != null && contratos != null ) {
-					for (int i = 0; i < empleados.size(); i++) {
-						Empleados emp = empleados.get(i);
-						Contratos con = contratos.get(i);
+				if (empleados != null) {
+					for (Empleados emp : empleados) {
 				%>
 				<tr>
 					<td><%=emp.getNombre()%></td>
@@ -54,14 +60,32 @@
 					<td><%=emp.getTelefono()%></td>
 					<td><%=emp.getCorreo()%></td>
 					<td><%=emp.getDireccion()%></td>
+					<%
+					int aux = 0;
+					for (Contratos con : contratos) {
+
+						if (con.getIdEmpleado() == emp.getIdEmpleados() && con.getVigencia().equals("Activo")) {
+							aux = 1;
+					%>
 					<td><%=con.getVigencia()%></td>
+					<%
+					}else if(con.getVigencia().equals("Activo")){
+						aux = 0;
+					}
+					}
+					%>
+					<%
+					if (aux == 0) {
+					%>
+					<td>Inactivo</td>
+					<%
+					} else {
+					aux = 0;
+					}
+					%>
 					<td><a
-						href="EmpleadosController?operacion=editar&idEmpleado=<%=emp.getIdEmpleados()%>"
-						class="btn btn-warning btn-sm">Editar</a> <a
-						href="EmpleadosController?operacion=produccion&idEmpleado=<%=emp.getIdEmpleados()%>"
-						class="btn btn-info btn-sm">Producción</a> <a
-						href="EmpleadosController?operacion=contrato&idEmpleado=<%=emp.getIdEmpleados()%>"
-						class="btn btn-primary btn-sm">Contrato</a></td>
+						href="EmpleadosController?operacion=obtener&idEmpleado=<%=emp.getIdEmpleados()%>"
+						class="btn btn-warning btn-sm">Editar</a></td>
 				</tr>
 				<%
 				}

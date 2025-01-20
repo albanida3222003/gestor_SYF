@@ -37,23 +37,17 @@ public class EmpleadosController extends HttpServlet {
 				case "listar":
 					listar(request, response);
 					break;
-				case "registrarEmpleado":
-					registrarEmpleado(request, response);
-					break;
-				case "registrarContrato":
-					registrarContrato(request, response);
-					break;
-				case "editar":
+				case "obtener":
 					obtener(request, response);
 					break;
-				case "modificar":
+				case "editar":
 					editar(request, response);
 					break;
-				case "eliminar":
-					eliminar(request, response);
-					break;
 				case "nuevo":
-					request.getRequestDispatcher("/empleados/empleadosFormulario.jsp").forward(request, response);
+					request.getRequestDispatcher("/empleados/registrarEmpleados.jsp").forward(request, response);
+					break;
+				case "registrar":
+					registrar(request, response);
 					break;
 				default:
 					listar(request, response);
@@ -65,22 +59,8 @@ public class EmpleadosController extends HttpServlet {
 		}
 	}
 
-	// Método para listar empleados
-	protected void listar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try {
-			List<Empleados> empleados = empleadosModel.listarEmpleados();
-			request.setAttribute("empleados", empleados);
-			List<Contratos> contratos = contratosModel.listarContratos();
-			request.setAttribute("contratos", contratos);
-			request.getRequestDispatcher("/empleados/listarEmpleados.jsp").forward(request, response);
-		} catch (Exception e) {
-			System.out.println("listar() " + e.getMessage());
-		}
-	}
-
-	// Método para registrar un empleado
-	protected void registrarEmpleado(HttpServletRequest request, HttpServletResponse response)
+	// Método para registrar el empleado
+	protected void registrar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
 			// Datos del empleado
@@ -96,47 +76,14 @@ public class EmpleadosController extends HttpServlet {
 			// Crear objeto empleado
 			Empleados emp = new Empleados(0, nombre, apellido, dni, sexo, correo, telefono, direccion, fechaNacimiento);
 
-			// Registrar empleado
-			boolean registradoEmpleado = empleadosModel.registrarEmpleados(emp);
-
-			if (registradoEmpleado) {
-				// Si el empleado se registra con éxito, redirige a registrar contrato
-				
-				request.setAttribute("idEmpleado", empleadosModel.obtenerEmpleado(0).getIdEmpleados());
-				request.getRequestDispatcher("/empleados/contratoFormulario.jsp").forward(request, response);
+			if (empleadosModel.registrarEmpleados(emp)) {
+				request.getSession().setAttribute("exito", "empleado insertado");
 			} else {
-				response.sendRedirect("error.jsp");
+				request.getSession().setAttribute("fracaso", "empleado NO insertado");
 			}
+			response.sendRedirect(request.getContextPath() + "/EmpleadosController?operacion=listar");
 		} catch (Exception e) {
 			System.out.println("registrarEmpleado() " + e.getMessage());
-		}
-	}
-
-	// Método para registrar el contrato
-	protected void registrarContrato(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try {
-			int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
-
-			// Datos del contrato
-			java.sql.Date fechaComienzo = java.sql.Date.valueOf(request.getParameter("fechaComienzo"));
-			java.sql.Date fechaFin = java.sql.Date.valueOf(request.getParameter("fechaFin"));
-			String vigencia = "Activo"; // Valor fijo
-			int departamento = Integer.parseInt(request.getParameter("departamento"));
-
-			// Crear objeto contrato
-			Contratos contrato = new Contratos(0, fechaComienzo, fechaFin, vigencia, idEmpleado, departamento);
-
-			// Registrar contrato
-			boolean registradoContrato = contratosModel.insertarContrato(contrato);
-
-			if (registradoContrato) {
-				response.sendRedirect("EmpleadosController?operacion=listar");
-			} else {
-				response.sendRedirect("error.jsp");
-			}
-		} catch (Exception e) {
-			System.out.println("registrarContrato() " + e.getMessage());
 		}
 	}
 
@@ -144,7 +91,7 @@ public class EmpleadosController extends HttpServlet {
 	protected void editar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+			int idEmpleado = Integer.parseInt(request.getParameter("id"));
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
 			String dni = request.getParameter("dni");
@@ -153,6 +100,7 @@ public class EmpleadosController extends HttpServlet {
 			String telefono = request.getParameter("telefono");
 			String direccion = request.getParameter("direccion");
 			java.sql.Date fechaNacimiento = java.sql.Date.valueOf(request.getParameter("fechaNacimiento"));
+
 			Empleados emp = new Empleados(idEmpleado, nombre, apellido, dni, sexo, correo, telefono, direccion,
 					fechaNacimiento);
 
@@ -161,7 +109,7 @@ public class EmpleadosController extends HttpServlet {
 			} else {
 				request.getSession().setAttribute("exito", "empleado NO modificado");
 			}
-			response.sendRedirect(request.getContextPath() + "/EmpleadoController?operacion=listar");
+			response.sendRedirect(request.getContextPath() + "/EmpleadosController?operacion=listar");
 		} catch (Exception e) {
 			System.out.println("editar() " + e.getMessage());
 		}
@@ -187,20 +135,17 @@ public class EmpleadosController extends HttpServlet {
 		}
 	}
 
-	// Método para eliminar un empleado
-	protected void eliminar(HttpServletRequest request, HttpServletResponse response)
+	// Método para listar empleados
+	protected void listar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
-
-			boolean eliminado = empleadosModel.eliminarEmpleados(idEmpleado);
-			if (eliminado) {
-				response.sendRedirect("EmpleadosController?operacion=listar");
-			} else {
-				response.sendRedirect("error.jsp");
-			}
+			List<Empleados> empleados = empleadosModel.listarEmpleados();
+			request.setAttribute("empleados", empleados);
+			List<Contratos> contratos = contratosModel.listarContratos();
+			request.setAttribute("contratos", contratos);
+			request.getRequestDispatcher("/empleados/listarEmpleados.jsp").forward(request, response);
 		} catch (Exception e) {
-			System.out.println("eliminar() " + e.getMessage());
+			System.out.println("listar() " + e.getMessage());
 		}
 	}
 

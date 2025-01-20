@@ -42,7 +42,7 @@ public class ProduccionesModel extends Conexion {
     public boolean crearProduccion(Producciones produccion) {
         boolean exito = false;
         try {
-            String sql = "call sp_crear_produccion(?, ?, ?, ?, ?, ?);";
+            String sql = "call sp_crear_produccion( ?, ?, ?, ?, ?);";
             this.openConnection();
             cs = conexion.prepareCall(sql);
             cs.setDate(1, new java.sql.Date(produccion.getFechaProduccion().getTime()));

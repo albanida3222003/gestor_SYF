@@ -15,7 +15,7 @@
         <h2 class="text-center">Registrar Nuevo Empleado</h2>
 
         <div class="card bg-secondary p-4">
-            <form action="EmpleadosController?operacion=registrarEmpleado" method="POST">
+            <form action="EmpleadosController?operacion=registrar" method="POST">
                 <!-- Campos de empleado -->
                 <div class="mb-3">
                     <label class="form-label">Nombre</label>
@@ -66,5 +66,6 @@
             </form>
         </div>
     </div>
+
 </body>
 </html>
