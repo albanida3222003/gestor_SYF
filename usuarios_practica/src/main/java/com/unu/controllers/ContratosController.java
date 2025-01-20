@@ -7,34 +7,69 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet implementation class ContratosController
- */
+import com.unu.beans.Contratos;
+import com.unu.beans.Proveedores;
+import com.unu.model.ContratosModel;
+
 public class ContratosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	private ContratosModel contratosModel = new ContratosModel();
+	
     public ContratosController() {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+		String operacion = request.getParameter("operacion");
+
+		try {
+			if (operacion == null) {
+				//listar(request, response);
+			} else {
+				switch (operacion) {
+				case "listar":
+					//listar(request, response);
+					break;
+				case "nuevo":
+					request.getRequestDispatcher("/contratos/registrarContratos.jsp").forward(request, response);
+					break;
+				case "insertar":
+					insertar(request, response);
+					break;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("processRequest() " + e.getMessage());
+		}
+	}
+    
+    protected void insertar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			Contratos con = new Contratos();
+			con.setFechaComienzo(java.sql.Date.valueOf(request.getParameter("fechaComienzo")));
+			con.setFechaFin(java.sql.Date.valueOf(request.getParameter("fechaFin")));
+			con.setIdDepartamento(Integer.parseInt(request.getParameter("departamento")));
+			con.setVigencia(request.getParameter("vigencia"));
+			con.setIdEmpleado(Integer.parseInt(request.getParameter("empleado")));
+			
+			boolean resultado = contratosModel.insertarContrato(con);
+			response.sendRedirect("EmpleadosController?operacion=listar");
+		} catch (Exception e) {
+			System.out.println("insertar() " + e.getMessage());
+		}
+	}
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		processRequest(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		processRequest(request, response);
 	}
 
 }

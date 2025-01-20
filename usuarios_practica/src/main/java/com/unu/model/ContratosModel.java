@@ -36,6 +36,32 @@ public class ContratosModel extends Conexion {
 		}
 		return contratos;
 	}
+	
+	public Contratos obtener(int aux) {
+		Contratos contrato = null;
+		try {
+			String sql = "CALL obtener_ultimo_contrato(?);";
+			this.openConnection();
+			cs = conexion.prepareCall(sql);
+			cs.setInt(1, aux);
+			rs = cs.executeQuery();
+
+			while (rs.next()) {
+				contrato = new Contratos();
+				contrato.setIdcontrato(rs.getInt("idcontrato"));
+				contrato.setFechaComienzo(rs.getDate("fecha_comienzo"));
+				contrato.setFechaFin(rs.getDate("fecha_fin"));
+				contrato.setVigencia(rs.getString("vigencia"));
+				contrato.setIdEmpleado(rs.getInt("id_empleado"));
+				contrato.setIdDepartamento(rs.getInt("id_departamento"));
+
+			}
+			this.closeConnection();
+		} catch (Exception e) {
+			System.out.println("obtener() " + e.getMessage());
+		}
+		return contrato;
+	}
 
 	// Método para insertar un contrato
 	public boolean insertarContrato(Contratos contrato) {
@@ -60,7 +86,7 @@ public class ContratosModel extends Conexion {
 		}
 		return resultado;
 	}
-
+	
 	// Método para actualizar un contrato
 	public boolean actualizarContrato(Contratos contrato) {
 		boolean resultado = false;

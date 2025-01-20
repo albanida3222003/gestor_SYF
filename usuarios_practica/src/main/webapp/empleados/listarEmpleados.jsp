@@ -1,3 +1,4 @@
+<%@page import="com.unu.model.ContratosModel"%>
 <%@page import="java.util.List"%>
 <%@page import="com.unu.beans.Empleados"%>
 <%@page import="com.unu.beans.Contratos"%>
@@ -61,26 +62,15 @@
 					<td><%=emp.getCorreo()%></td>
 					<td><%=emp.getDireccion()%></td>
 					<%
-					int aux = 0;
-					for (Contratos con : contratos) {
-
-						if (con.getIdEmpleado() == emp.getIdEmpleados() && con.getVigencia().equals("Activo")) {
-							aux = 1;
+					Contratos con = new ContratosModel().obtener(emp.getIdEmpleados());
+					if (con != null) {
 					%>
 					<td><%=con.getVigencia()%></td>
 					<%
-					}else if(con.getVigencia().equals("Activo")){
-						aux = 0;
-					}
-					}
-					%>
-					<%
-					if (aux == 0) {
+					} else {
 					%>
 					<td>Inactivo</td>
 					<%
-					} else {
-					aux = 0;
 					}
 					%>
 					<td><a
